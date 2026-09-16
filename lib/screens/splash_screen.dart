@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'welcome_screen.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -49,15 +51,19 @@ class _SplashScreenState extends State<SplashScreen>
 
     if (!mounted) return;
 
-    // We will replace this later with your next screen.
-    // Example:
-    //
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => const WelcomeScreen(),
-    //   ),
-    // );
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const WelcomeScreen(),
+
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+
+        transitionDuration: const Duration(milliseconds: 700),
+      ),
+    );
   }
 
   @override
